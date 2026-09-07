@@ -4,7 +4,8 @@ import { ChatMessage, Message } from '@/components/ui/ChatMessage';
 import { DestinationCard } from '@/components/ui/DestinationCard';
 import { QuickPromptButton } from '@/components/ui/QuickPromptButton';
 import { POPULAR_DESTINATIONS, QUICK_PROMPTS } from '@/data/default_data';
-import { LampDesk, Lightbulb, LocationEdit, Plane } from 'lucide-react';
+import { sendChatMessage } from '@/services/chatService';
+import { Lightbulb, LocationEdit, Plane } from 'lucide-react';
 import React, { useState, useRef, useEffect } from 'react';
 
 const HomePage: React.FC = () => {
@@ -31,16 +32,10 @@ const HomePage: React.FC = () => {
 		setLoading(true);
 
 		try {
-			const response = await fetch('http://localhost:3000/api/chat', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ message: textToSend }),
-			});
-
-			const data: { reply: string } = await response.json();
+			const data = await sendChatMessage(textToSend);
 			setMessages([...newMessages, { role: 'assistant', content: data.reply }]);
 		} catch (error) {
-			console.error('Error:', error);
+			console.error('API Error:', error);
 			setMessages([...newMessages, { role: 'assistant', content: 'Maaf, terjadi kesalahan koneksi ke server.' }]);
 		} finally {
 			setLoading(false);
@@ -64,10 +59,7 @@ const HomePage: React.FC = () => {
 					<aside className="lg:col-span-4 space-y-6">
 						<div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
 							<h2 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-								<span>
-									<LocationEdit size={16} />
-								</span>{' '}
-								Destinasi Favorit
+								<LocationEdit size={16} /> Destinasi Favorit
 							</h2>
 							<div className="grid grid-cols-2 gap-3">
 								{POPULAR_DESTINATIONS.map((item, idx) => (
@@ -77,9 +69,9 @@ const HomePage: React.FC = () => {
 						</div>
 
 						<div className="bg-slate-900 border border-blue-500/20 rounded-2xl p-5">
-							<div className="flex row gap-1">
-								<Lightbulb size={16} color="#FFF" />
-								<h3 className="font-semibold text-blue-400 text-sm mb-1">Tips Chat</h3>
+							<div className="flex items-center gap-1.5 mb-1">
+								<Lightbulb size={16} className="text-blue-400" />
+								<h3 className="font-semibold text-blue-400 text-sm">Tips Chat</h3>
 							</div>
 							<p className="text-xs text-slate-300 leading-relaxed">Tanyakan cuaca real-time, rekomendasi hotel sesuai budget, atau itinerary harian secara lengkap.</p>
 						</div>
@@ -110,9 +102,9 @@ const HomePage: React.FC = () => {
 										</div>
 										<h3 className="font-bold text-white text-base">Mulai Obrolan Liburanmu</h3>
 										<p className="text-xs text-slate-400 mt-1 mb-6">Pilih pertanyaan cepat di bawah ini atau ketik pesan secara bebas.</p>
-										<div className="w-[100] rounded-lg space-y-2">
+										<div className="w-[448px] max-w-full space-y-2">
 											{QUICK_PROMPTS.map((item, i) => (
-												<QuickPromptButton key={i} item={item} onClick={(prompt) => sendMessage(prompt)} />
+												<QuickPromptButton key={i} item={item} onClick={sendMessage} />
 											))}
 										</div>
 									</div>
