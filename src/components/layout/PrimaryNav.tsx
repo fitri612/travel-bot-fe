@@ -1,13 +1,12 @@
 import { cn } from '@/utils/cn';
 import { Button, SearchBar } from '@/components/ui';
+import TravelBotLogo from '@/assets/icons/TravelBotLogo';
 
 interface PrimaryNavProps {
 	onSignUp?: () => void;
 	onLogin?: () => void;
 	className?: string;
 }
-
-const TravelBotLogo = () => <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-sm border border-blue-400/30">🤖</div>;
 
 function PrimaryNav({ onSignUp, onLogin, className }: PrimaryNavProps) {
 	return (

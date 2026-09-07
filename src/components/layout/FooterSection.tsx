@@ -1,3 +1,4 @@
+import TravelBotLogo from '@/assets/icons/TravelBotLogo';
 import { cn } from '@/utils/cn';
 
 interface FooterSectionProps {
@@ -12,7 +13,7 @@ function FooterSection({ className }: FooterSectionProps) {
 			<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 				{/* Brand & Tagline */}
 				<div className="flex items-center gap-2">
-					<div className="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">🤖</div>
+          <TravelBotLogo />
 					<span className="text-white font-bold text-base tracking-tight">
 						Travel<span className="text-blue-500">Bot</span>
 					</span>
