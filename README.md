@@ -54,5 +54,5 @@ Ensure you have the following installed on your machine:
 
 1. **Clone the Repository**
    ```bash
-   git clone [https://github.com/your-username/travel-bot.git](https://github.com/your-username/travel-bot.git)
+   git clone https://github.com/fitri612/travel-bot-fe
    cd travel-bot
