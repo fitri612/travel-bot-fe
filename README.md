@@ -4,6 +4,8 @@ An AI-powered travel assistant web application designed to help users plan trips
 
 This application connects a **React (TypeScript) + Tailwind CSS** frontend with a **Node.js / Express** backend powered by **Google Gemini AI**.
 
+<img width="1920" height="1080" alt="COURTY" src="https://github.com/user-attachments/assets/fbb8065d-735f-48c8-bbdb-00fd63f052f8" />
+
 ---
 
 ## 🌟 Key Features
